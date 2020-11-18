@@ -1,0 +1,31 @@
+.nav {
+   grid-area: n;
+   background-color: rgb(106, 126, 192);
+   padding: 20px;
+   border-radius: 5px;
+}
+.item a{
+   color: #fff;
+   text-decoration: none;
+}
+
+.item .activeLink{
+   color: rgb(243, 169, 8);
+}
+
+.titleFriends {
+   margin-top: 90px;
+   color: #f0f0f0;
+}
+.friends{
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+}
+.friend{
+   text-align: center;
+   margin-bottom: 10px;
+}
+.friend img {
+   width: 45px;
+   border-radius: 50%;
+}
