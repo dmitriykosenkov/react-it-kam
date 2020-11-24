@@ -18,25 +18,26 @@ const profilePageReducer = (state = defaultProfile, action) => {
             post: state.newPostText,
             likeCount: 0
          };
-         let stateCopy = {...state};
-         stateCopy.posts = [...state.posts];
-         stateCopy.posts.push(newPost);
-         stateCopy.newPostText = '';
-         return stateCopy;
+         return {
+            ...state,
+            posts: [...state.posts, newPost],
+            newPostText: ''
+         };
       }
       case UPDATE_NEW_POST_TEXT:
-         let stateCopy = {...state};
-         stateCopy.newPostText = action.text; 
-         return stateCopy; 
+         return {
+            ...state,
+            newPostText: action.text
+         };
       default:
          return state;
    }
 }
 
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = () => ({ type: ADD_POST });
 
-export const updateNewPostTextActionCreator = (text) => 
-    ({type: UPDATE_NEW_POST_TEXT, text: text});
+export const updateNewPostTextActionCreator = (text) =>
+   ({ type: UPDATE_NEW_POST_TEXT, text: text });
 
 export default profilePageReducer;
