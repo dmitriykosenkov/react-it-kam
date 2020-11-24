@@ -7,7 +7,6 @@ import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-let reRenderTree = () => {
    ReactDOM.render(
       <React.StrictMode>
          <BrowserRouter>
@@ -18,11 +17,7 @@ let reRenderTree = () => {
       </React.StrictMode>,
       document.getElementById('root')
    );
-}
-reRenderTree();
-store.subscribe(() => {
-   reRenderTree()
-});
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

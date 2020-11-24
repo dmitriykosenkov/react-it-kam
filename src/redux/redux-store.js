@@ -2,7 +2,7 @@ import dialogPageReducer from "./dialog-reducer";
 import profilePageReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
-const { createStore, combineReducers } = require("redux");
+import { createStore, combineReducers } from "redux";
 
 let reducers = combineReducers({
    profilePage: profilePageReducer,
@@ -11,5 +11,7 @@ let reducers = combineReducers({
 })
 
 let store = createStore(reducers)
+
+window.store = store;
 
 export default store;
