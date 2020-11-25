@@ -8,6 +8,7 @@ import Settings from './components/Settings/Settings';
 import { Route } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
+import UserPageContainer from './components/UserPage/UserPageContainer';
 
 const App = (props) => {
    return (
@@ -18,6 +19,7 @@ const App = (props) => {
             <div className="app-wrapper-content-inner">
                <Route path='/dialogs' render={() => <DialogsContainer />} />
                <Route path='/profile' render={() => <Profile />} />
+               <Route path='/userpage' render={() => <UserPageContainer />} />
                <Route path='/music' render={() => <Music />} />
                <Route path='/news' render={() => <News />} />
                <Route path='/settings' render={() => <Settings />} />
