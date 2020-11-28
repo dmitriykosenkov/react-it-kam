@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { followAC, setUsersAC, unfollowAC } from "../../redux/userPageReducer";
-import UserPage from "./UserPage";
+import UserPageC from "./UserPageC";
 
 
 let mapStateToProps = (state) => {
@@ -24,6 +24,6 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 
-const UserPageContainer = connect(mapStateToProps, mapDispatchToProps)(UserPage)
+const UserPageContainer = connect(mapStateToProps, mapDispatchToProps)(UserPageC)
 
 export default UserPageContainer;
