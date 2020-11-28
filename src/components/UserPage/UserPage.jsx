@@ -3,15 +3,20 @@ import * as axios from 'axios';
 import userPhoto from '../../assets/images/user-photo.webp';
 
 let UserPage = (props) => {
-   
-   if (props.users.length === 0) {
-      axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-         debugger
-         props.setUsers(response.data.items)
-      })
+   let getUsers = () => {
+      if (props.users.length === 0) {
+         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            debugger
+            props.setUsers(response.data.items)
+         })
+      }
    }
+
    return (
       <div>
+         <div>
+            <button onClick={getUsers}>Get Users</button>
+         </div>
          {props.users.map(u => <div key={u.id}>
             <div className={s.photoUrl}>
                <img src={u.photos.small != null ? u.photos.small : userPhoto} />
