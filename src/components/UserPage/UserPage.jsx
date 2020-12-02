@@ -2,6 +2,7 @@ import React from 'react'
 import s from './UserPage.module.css';
 import * as axios from 'axios';
 import userPhoto from '../../assets/images/user-photo.webp';
+import Users from './Users';
 
 
 class UserPage extends React.Component {
@@ -23,42 +24,14 @@ class UserPage extends React.Component {
    }
 
    render() {
-      let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-
-      let pages = [];
-
-      for (let i = 1; i <= pagesCount; i++) {
-         pages.push(i);
-      }
-
-      return (
-         <div>
-            <div>
-               {pages.map(p => {
-                  return <span onClick={() => {this.onPageChanged(p)}} 
-                               className={this.props.currentPage === p && s.selectedPage}>{p}</span>
-               })}
-            </div>
-            {
-               this.props.users.map(u => <div key={u.id}>
-                  <div className={s.photoUrl}>
-                     <img src={u.photos.small != null ? u.photos.small : userPhoto} />
-                  </div>
-                  <div>
-                     {!u.followed
-                        ? <button onClick={() => { this.props.follow(u.id) }}>Follow</button>
-                        : <button onClick={() => { this.props.unfollow(u.id) }}>Unfollow</button>
-                     }
-                  </div>
-                  <div>
-                     <div>{u.name}</div>
-                     <div>{u.status}</div>
-                  </div>
-                  <div>u.location.city</div>
-                  <div>u.location.country</div>
-               </div>)}
-         </div>
-      )
+      return <Users
+                  totalUsersCount={this.props.totalUsersCount}
+                  pageSize={this.props.pageSize}
+                  users={this.props.users}
+                  currentPage={this.props.currentPage}
+                  follow={this.props.follow}
+                  unfollow={this.props.unfollow}
+                  onPageChanged={this.onPageChanged}/> 
    }
 
 }
