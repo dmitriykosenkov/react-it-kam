@@ -1,23 +1,25 @@
-import s from './UserPage.module.css';
-import * as axios from 'axios';
+import React from 'react';
 import userPhoto from '../../assets/images/user-photo.webp';
+import s from './UserPage.module.css';
 
-let UserPage = (props) => {
-   let getUsers = () => {
-      if (props.users.length === 0) {
-         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            debugger
-            props.setUsers(response.data.items)
-         })
+const Users = (props) => {
+   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+      let pages = [];
+
+      for (let i = 1; i <= pagesCount; i++) {
+         pages.push(i);
       }
-   }
-
    return (
       <div>
-         <div>
-            <button onClick={getUsers}>Get Users</button>
-         </div>
-         {props.users.map(u => <div key={u.id}>
+      <div>
+         {pages.map(p => {
+            return <span onClick={() => {props.onPageChanged(p)}} 
+                         className={props.currentPage === p && s.selectedPage}>{p}</span>
+         })}
+      </div>
+      {
+         props.users.map(u => <div key={u.id}>
             <div className={s.photoUrl}>
                <img src={u.photos.small != null ? u.photos.small : userPhoto} />
             </div>
@@ -34,8 +36,8 @@ let UserPage = (props) => {
             <div>u.location.city</div>
             <div>u.location.country</div>
          </div>)}
-      </div>
+   </div>   
    )
 }
 
-export default UserPage;
+export default Users;
