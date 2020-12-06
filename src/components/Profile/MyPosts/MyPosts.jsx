@@ -16,7 +16,7 @@ const MyPosts = (props) => {
 
    return (
       <div className={s.postsBlock}>
-         <h3>My posts</h3>
+         <h3>Posts</h3>
          <div>
             <div>
                <div>

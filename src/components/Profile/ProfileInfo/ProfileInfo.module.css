@@ -1,11 +1,13 @@
 .descriptionBlock {
    padding: 10px;
 }
-.img {
+.userPhoto {
+   width: 200px;
 }
-/* .profileInfo {
-   background-image: url("https://theinpaint.com/images/example-1-2.jpg");
-   background-position: 0 0;
-   background-repeat: no-repeat;
-   background-size: cover;
-} */
+.twitterIcon{
+   width: 50px;
+}
+.profileInfo {
+   max-width: 100%;
+   margin: 0 auto;
+}
