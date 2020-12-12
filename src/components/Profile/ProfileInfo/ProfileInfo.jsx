@@ -21,10 +21,13 @@ const ProfileInfo = (props) => {
             <div>
                {props.profile.aboutMe}
             </div>
+            <div>{props.profile.userId}</div>
             <div className={s.twitterIcon}>
-               <NavLink to={props.profile.contacts.twitter}>
-                  <img src="https://cdn3.iconfinder.com/data/icons/picons-social/57/43-twitter-512.png" />
-               </NavLink>
+               {props.profile.contacts.twitter != null ?
+                  <NavLink to={props.profile.contacts.twitter}>
+                     <img src="https://cdn3.iconfinder.com/data/icons/picons-social/57/43-twitter-512.png" />
+                  </NavLink>
+                  : ""}
             </div>
          </div>
       </div>

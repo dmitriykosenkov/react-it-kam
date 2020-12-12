@@ -8,7 +8,7 @@ const Users = (props) => {
 
    let pages = [];
 
-   for (let i = 1; i <= 20; i++) {
+   for (let i = 1; i <= pagesCount; i++) {
       pages.push(i);
    }
    return (
@@ -22,7 +22,7 @@ const Users = (props) => {
          {
             props.users.map(u => <div key={u.id}>
                <div className={s.photoUrl}>
-                  <NavLink to="/profile" >
+                  <NavLink to={"/profile/" + u.id} >
                      <img src={u.photos.small != null ? u.photos.small : userPhoto} />
                   </NavLink>
                </div>
@@ -32,7 +32,9 @@ const Users = (props) => {
                      : <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
                   }
                </div>
+
                <div>
+                  <div>{u.id}</div>
                   <div>{u.name}</div>
                   <div>{u.status}</div>
                </div>
