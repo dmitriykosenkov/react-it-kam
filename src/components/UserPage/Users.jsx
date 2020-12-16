@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import userPhoto from '../../assets/images/user-photo.webp';
 import s from './UserPage.module.css';
 import * as axios from 'axios';
+import { followingAPI } from '../../api/api';
 
 const Users = (props) => {
    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -30,27 +31,19 @@ const Users = (props) => {
                <div>
                   {!u.followed
                      ? <button onClick={() => { 
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                           withCredentials: true,
-                           headers: {
-                              "API-KEY": "ba964194-f87c-4642-b2f3-156ec9ed6f7e"
-                           }
-                        })
-                        .then(response => {
-                           if (response.data.resultCode === 0) {
+                        followingAPI.follow(u.id)
+                        .then(data => {
+                           // debugger
+                           if (data.resultCode === 0) {
                               props.follow(u.id)
                            }
                         })
                      }}>Follow</button>
                      : <button onClick={() => { 
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                           withCredentials: true,
-                           headers: {
-                              "API-KEY": "ba964194-f87c-4642-b2f3-156ec9ed6f7e"
-                           }
-                        })
-                        .then(response => {
-                           if (response.data.resultCode === 0) {
+                        followingAPI.unfollow(u.id)
+                        .then(data => {
+                           // debugger
+                           if (data.resultCode === 0) {
                               props.unfollow(u.id)
                            }
                         })
