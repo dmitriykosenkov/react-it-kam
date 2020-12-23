@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom';
-import s from './../Navbar.module.css';
+import s from './Friend.module.css';
 
 const Friend = (props) => {
+   // debugger
    return (
-      <div className={s.friend}>
-         <div>
-            <img src={props.src} alt="" />
-         </div>
-         <div className={s.item}>
-            <NavLink to="">{props.name}</NavLink>
-         </div>
+      <div>
+         <NavLink to={"/profile/" + props.id} className={s.friend}>
+            <div className={s.name}>
+               {props.name.length > 6 ? props.name.slice(0, 5) + "..." : props.name}
+            </div>
+         </NavLink>
       </div>
    )
 }

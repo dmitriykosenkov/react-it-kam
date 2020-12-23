@@ -12,20 +12,13 @@
 .item .activeLink{
    color: rgb(243, 169, 8);
 }
-
 .titleFriends {
    margin-top: 90px;
    color: #f0f0f0;
 }
 .friends{
    display: grid;
-   grid-template-columns: 1fr 1fr 1fr;
-}
-.friend{
-   text-align: center;
-   margin-bottom: 10px;
-}
-.friend img {
-   width: 45px;
-   border-radius: 50%;
-}
+   grid-template-columns: repeat(3, 1fr);
+   grid-gap: 10px;
+} 
+

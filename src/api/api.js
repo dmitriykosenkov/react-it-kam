@@ -39,3 +39,11 @@ export const profileAPI = {
       .then(response => response.data)
    }
 }
+
+export const sidebarAPI = {
+   getFriends(pageSize){
+      return instaceAxios.get(`users?count=${pageSize}`)
+         .then(response => response.data)
+   }
+}
+
