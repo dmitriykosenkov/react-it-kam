@@ -1,5 +1,6 @@
+import { sidebarAPI } from "../api/api";
+
 const SET_FRIENDS = "SET_FRIENDS";
-const SET_CURRENT_FRIENDS = "SET_CURRENT_FRIENDS";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 let defaultSidebar = {
@@ -28,7 +29,15 @@ const sidebarReducer = (state = defaultSidebar, action) => {
 }
 
 export const setFriends = (friends) => ({ type: SET_FRIENDS, friends })
-
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+
+export const getFriendsThunkCreator = (pageSize) => (dispatch) => {
+   dispatch(toggleIsFetching(true));
+   sidebarAPI.getFriends(pageSize)
+      .then(data => {
+         dispatch(toggleIsFetching(false));
+         dispatch(setFriends(data.items));
+      })
+}
 
 export default sidebarReducer;

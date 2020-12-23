@@ -12,23 +12,20 @@ export const usersAPI = {
    getUsers(currentPage, pageSize) {
       return instaceAxios.get(`users?page=${currentPage}&count=${pageSize}`)
          .then(response => response.data)
-   }
-}
-
-export const authAPI = {
-   authMe() {
-      return instaceAxios.get(`auth/me`)
-         .then(response => response.data)
-   }
-}
-
-export const followingAPI = {
+   },
    follow(id) {
       return instaceAxios.post(`follow/${id}`)
          .then(response => response.data)
    },
    unfollow(id) {
       return instaceAxios.delete(`follow/${id}`)
+         .then(response => response.data)
+   }
+}
+
+export const authAPI = {
+   authMe() {
+      return instaceAxios.get(`auth/me`)
          .then(response => response.data)
    }
 }

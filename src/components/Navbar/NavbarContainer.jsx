@@ -1,23 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { setFriends, toggleIsFetching } from "../../redux/sidebar-reducer";
+import { getFriendsThunkCreator } from "../../redux/sidebar-reducer";
 import Navbar from './Navbar';
-import { sidebarAPI } from "../../api/api";
 import Preloader from "../commons/preloader/preloader";
-
 class NavbarClass extends React.Component {
-
    componentDidMount() {
-      
-      this.props.toggleIsFetching(true)
-      sidebarAPI.getFriends(this.props.pageSize)
-         .then(data => {
-            debugger
-            this.props.toggleIsFetching(false)
-            this.props.setFriends(data.items)
-         })
+      this.props.getFriendsThunkCreator(this.props.pageSize)
    }
-
    render() {
       // debugger
       return <>
@@ -29,7 +18,6 @@ class NavbarClass extends React.Component {
    }
 }
 
-
 let mapStateToProps = (state) => {
    return {
       friends: state.sidebar.friends,
@@ -38,7 +26,6 @@ let mapStateToProps = (state) => {
    }
 }
 
-const NavbarContainer = connect(mapStateToProps, { setFriends, toggleIsFetching })(NavbarClass)
-
+const NavbarContainer = connect(mapStateToProps, { getFriendsThunkCreator })(NavbarClass)
 
 export default NavbarContainer;
