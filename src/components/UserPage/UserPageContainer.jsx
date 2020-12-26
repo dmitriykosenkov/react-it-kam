@@ -9,6 +9,7 @@ import {
 import { connect } from "react-redux";
 import Users from './Users';
 import Preloader from "../commons/preloader/preloader";
+import withAuthRedirectComponent from "../../hoc/authRedirect";
 class UserPage extends React.Component {
    componentDidMount() {
       this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
@@ -33,6 +34,8 @@ class UserPage extends React.Component {
    }
 }
 
+let authRedirect = withAuthRedirectComponent(UserPage);
+
 let mapStateToProps = (state) => {
    return {
       users: state.userPage.users,
@@ -48,6 +51,6 @@ const UserPageContainer = connect(mapStateToProps,
    {
       getUsersThunkCreator, followThunkCreator, unfollowThunkCreator,
       setTotalUsersCount, toggleFollowingProgress
-   })(UserPage)
+   })(authRedirect)
 
 export default UserPageContainer;
