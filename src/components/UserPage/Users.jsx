@@ -34,7 +34,7 @@ const Users = (props) => {
                         ? <button disabled={props.followingInProgress.some(id => id === u.id)} className={s.followBtn}
                            onClick={() => { props.followThunkCreator(u.id) }}>Follow</button>
                         : <button disabled={props.followingInProgress.some(id => id === u.id)} className={s.followBtn}
-                           onClick={() => { props.followThunkCreator(u.id) }}>Unfollow</button>
+                           onClick={() => { props.unfollowThunkCreator(u.id) }}>Unfollow</button>
                      }
                   </div>
 
