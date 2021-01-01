@@ -30,6 +30,6 @@ let mapStateToProps = (state) => {
 export default compose(
    connect(mapStateToProps, { getProfileThunkCreator }),
    withRouter,
-   withAuthRedirectComponent
+   // withAuthRedirectComponent
 )(ProfilePage)
 

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import Preloader from '../../commons/preloader/preloader'
 import s from './ProfileInfo.module.css'
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
    if (!props.profile) {
@@ -18,6 +19,7 @@ const ProfileInfo = (props) => {
             <h3>
                {props.profile.fullName}
             </h3>
+            <ProfileStatus status={'Привет'} />
             <div>
                {props.profile.aboutMe}
             </div>
