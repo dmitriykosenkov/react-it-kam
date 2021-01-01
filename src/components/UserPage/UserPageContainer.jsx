@@ -7,9 +7,11 @@ import {
    toggleFollowingProgress
 } from "../../redux/userPageReducer";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import Users from './Users';
 import Preloader from "../commons/preloader/preloader";
 import withAuthRedirectComponent from "../../hoc/authRedirect";
+
 class UserPage extends React.Component {
    componentDidMount() {
       this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
@@ -34,8 +36,6 @@ class UserPage extends React.Component {
    }
 }
 
-let authRedirect = withAuthRedirectComponent(UserPage);
-
 let mapStateToProps = (state) => {
    return {
       users: state.userPage.users,
@@ -47,10 +47,8 @@ let mapStateToProps = (state) => {
    }
 }
 
-const UserPageContainer = connect(mapStateToProps,
-   {
-      getUsersThunkCreator, followThunkCreator, unfollowThunkCreator,
-      setTotalUsersCount, toggleFollowingProgress
-   })(authRedirect)
-
-export default UserPageContainer;
+export default compose(
+   connect(mapStateToProps,
+      {getUsersThunkCreator, followThunkCreator, unfollowThunkCreator,setTotalUsersCount, toggleFollowingProgress}),
+   withAuthRedirectComponent
+)(UserPage)
