@@ -3,6 +3,7 @@ import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
 import s from './Dialogs.module.css';
 import { Redirect } from 'react-router-dom';
+import { Field, reduxForm, reset } from 'redux-form';
 
 
 const Dialogs = (props) => {
@@ -16,7 +17,11 @@ const Dialogs = (props) => {
       let text = e.target.value
       props.updateMessageText(text)
    }
-
+   const onSubmit = values => {
+      // props.updateMessageText(formData)
+      // props.addMessage(values.newDialog);
+      console.log(values);
+   }
    return (
       <div className={s.dialogs}>
          <div className={s.dialogsItems}>
@@ -26,19 +31,28 @@ const Dialogs = (props) => {
             <div>
                {messagesElements}
             </div>
-            <div>
-               <div>
-                  <textarea onChange={updateMessageText} value={props.newMessageText}/>
-               </div>
-               <div>
-                  <button onClick={addMessage}>Add message</button>
-               </div>
-            </div>
+            <DialogsReduxForm onSubmit={onSubmit} />
          </div>
-
       </div>
    )
 
 }
+
+const DialogsForm = (props) => {
+   return (
+      // handleSubmit приходит из reduxForm после оборачивания ею DialogsForm
+      <form onSubmit={props.handleSubmit}>
+         <div>
+            <Field component={"textarea"} name={"newDialog"} />
+         </div>
+         <div>
+            <button type="submit">Add message</button>
+         </div>
+      </form>
+   )
+}
+
+const afterSubmit = (result, dispatch) => dispatch(reset("newDialog"))
+const DialogsReduxForm = reduxForm({ form: "newDialog", onSubmitSuccess: afterSubmit })(DialogsForm)
 
 export default Dialogs;
