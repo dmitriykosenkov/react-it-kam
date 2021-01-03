@@ -7,22 +7,14 @@ const MyPosts = (props) => {
 
    let postsElements = props.posts.map(p => <Post message={p.post} likeCount={p.likeCount} key={p.id} />);
 
-   let onAddPost = () => {
-      props.addPost();
-   }
-   let onPostChange = (e) => {
-      let text = e.target.value;
-      props.updateNewPostText(text);
-   }
    const onSubmit = formData => {
-      console.log(formData);
+      props.addPost(formData.newPost);
    }
    return (
       <div className={s.postsBlock}>
          <h3>Posts</h3>
          <div>
-            <NewPostReduxForm onSubmit={onSubmit} onAddPost={onAddPost} onPostChange={onPostChange} 
-            newPostText={props.newPostText}/>
+            <NewPostReduxForm onSubmit={onSubmit} />
             <div className={s.posts}>
                {postsElements}
             </div>
@@ -31,15 +23,14 @@ const MyPosts = (props) => {
    )
 }
 
-const NewPostForm = (props) => {
+const AddNewPostForm = (props) => {
    return (
       <form onSubmit={props.handleSubmit}>
          <div>
-            <Field component={"textarea"} name={"newPost"} 
-            onChange={props.onPostChange} value={props.newPostText} placeholder={"Add new post"} />
+            <Field component={"textarea"} name={"newPost"} placeholder={"Add new post"} />
          </div>
          <div>
-            <button onClick={props.onAddPost}>Add post</button>
+            <button>Add post</button>
          </div>
       </form>
    )
@@ -47,6 +38,6 @@ const NewPostForm = (props) => {
 
 const afterSubmit = (result, dispatch) => dispatch(reset("newPost"))
 
-const NewPostReduxForm = reduxForm({form: "newPost", onSubmitSuccess: afterSubmit})(NewPostForm);
+const NewPostReduxForm = reduxForm({form: "newPost", onSubmitSuccess: afterSubmit})(AddNewPostForm);
 
 export default MyPosts;

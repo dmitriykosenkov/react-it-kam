@@ -2,7 +2,6 @@ import React from 'react';
 import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
 import s from './Dialogs.module.css';
-import { Redirect } from 'react-router-dom';
 import { Field, reduxForm, reset } from 'redux-form';
 
 
@@ -10,18 +9,10 @@ const Dialogs = (props) => {
    let dialogsElements = props.dialogs.map(d => <Dialog name={d.name} id={d.id} />);
    let messagesElements = props.messages.map(m => <Message message={m.message} />);
 
-   let addMessage = () => {
-      props.addMessage();
-   }
-   let updateMessageText = (e) => {
-      let text = e.target.value
-      props.updateMessageText(text)
-   }
    const onSubmit = values => {
-      // props.updateMessageText(formData)
-      // props.addMessage(values.newDialog);
-      console.log(values);
+      props.addMessage(values.newDialogBody);
    }
+
    return (
       <div className={s.dialogs}>
          <div className={s.dialogsItems}>
@@ -35,7 +26,6 @@ const Dialogs = (props) => {
          </div>
       </div>
    )
-
 }
 
 const DialogsForm = (props) => {
@@ -43,10 +33,11 @@ const DialogsForm = (props) => {
       // handleSubmit приходит из reduxForm после оборачивания ею DialogsForm
       <form onSubmit={props.handleSubmit}>
          <div>
-            <Field component={"textarea"} name={"newDialog"} />
+            {/* все онченжи и онклики уже находятся в redux-form, по этому внутри формы они не указываются  */}
+            <Field component="textarea" name="newDialogBody" placeholder="New message" />
          </div>
          <div>
-            <button type="submit">Add message</button>
+            <button >Add message</button>
          </div>
       </form>
    )
