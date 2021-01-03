@@ -19,7 +19,7 @@ const ProfileInfo = (props) => {
             <h3>
                {props.profile.fullName}
             </h3>
-            <ProfileStatus status={'Привет'} />
+            <ProfileStatus status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}/>
             <div>
                {props.profile.aboutMe}
             </div>

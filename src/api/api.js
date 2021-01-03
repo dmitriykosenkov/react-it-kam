@@ -31,9 +31,17 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-   setUserProfile(id) {
+   getUserProfile(id) {
       return instaceAxios.get(`profile/${id}`)
       .then(response => response.data)
+   },
+   getUserStatus(id) {
+      return instaceAxios.get(`profile/status/${id}`)
+   },
+   updateUserStatus(status) {
+      return instaceAxios.put(`profile/status/`, {
+         status: status
+      })
    }
 }
 

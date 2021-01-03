@@ -1,6 +1,6 @@
 .header {
    grid-area: h;
-   background-color: rgb(34, 168, 40);
+   background-color: rgb(57, 79, 153);
    border-radius: 5px;
    display: flex;
    justify-content: space-between;
@@ -9,4 +9,8 @@
 }
 .header img {
    width: 50px;
+}
+.login {
+   color: white;
+   text-decoration: none;
 }

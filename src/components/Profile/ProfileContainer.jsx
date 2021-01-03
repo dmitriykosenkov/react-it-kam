@@ -3,7 +3,7 @@ import Profile from './Profile';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getProfileThunkCreator } from "../../redux/profile-reducer";
+import { getProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator } from "../../redux/profile-reducer";
 import withAuthRedirectComponent from '../../hoc/authRedirect';
 
 class ProfilePage extends React.Component {
@@ -12,11 +12,13 @@ class ProfilePage extends React.Component {
       if(!userId) {
           userId = 13029;
       }
-      this.props.getProfileThunkCreator(userId)
+      this.props.getProfileThunkCreator(userId);
+      this.props.getUserStatusThunkCreator(userId);
    }
    render () {
       return (
-         <Profile {...this.props} profile={this.props.profile} />
+         <Profile {...this.props} profile={this.props.profile} status={this.props.status} 
+         updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator} />
       )
    }
 }
@@ -24,11 +26,12 @@ class ProfilePage extends React.Component {
 let mapStateToProps = (state) => {
    return {
       profile: state.profilePage.profile,
+      status: state.profilePage.status
    }
 }
 
 export default compose(
-   connect(mapStateToProps, { getProfileThunkCreator }),
+   connect(mapStateToProps, { getProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator }),
    withRouter,
    // withAuthRedirectComponent
 )(ProfilePage)
