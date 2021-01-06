@@ -27,6 +27,12 @@ export const authAPI = {
    authMe() {
       return instaceAxios.get(`auth/me`)
          .then(response => response.data)
+   },
+   login(email, password, rememberMe = false) {
+      return instaceAxios.post(`auth/login`, {email, password, rememberMe})
+   },
+   logout() {
+      return instaceAxios.delete(`auth/login`)
    }
 }
 

@@ -14,3 +14,20 @@
    color: white;
    text-decoration: none;
 }
+.logout {
+   border-radius: 5px;
+   border: none;
+   background-color: transparent;
+   color: white;
+   cursor: pointer;
+   outline: none;
+}
+.logout:active {
+   border-radius: 5px;
+   border: none;
+   background-color: transparent;
+}
+.logout:hover,
+.logout:focus {
+   background-color: tomato;
+}

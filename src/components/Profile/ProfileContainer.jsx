@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator } from "../../redux/profile-reducer";
 import withAuthRedirectComponent from '../../hoc/authRedirect';
+import { clearPost } from '../../redux/redux-store';
 
 class ProfilePage extends React.Component {
    componentDidMount() {
@@ -33,6 +34,6 @@ let mapStateToProps = (state) => {
 export default compose(
    connect(mapStateToProps, { getProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator }),
    withRouter,
-   // withAuthRedirectComponent
+   withAuthRedirectComponent
 )(ProfilePage)
 

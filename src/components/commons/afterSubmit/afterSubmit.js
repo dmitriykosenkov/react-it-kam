@@ -1,5 +1,6 @@
+import React from 'react';
 import { reset } from "redux-form";
 
-const clearInputField = (result, dispatch) => dispatch(reset(result));
+const afterSubmit = (result, fdsfds) => fdsfds(reset("newPost"))
 
-export default clearInputField;
+export default afterSubmit;

@@ -3,7 +3,8 @@ import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
 import s from './Dialogs.module.css';
 import { Field, reduxForm, reset } from 'redux-form';
-
+import { Textarea } from '../commons/FormControls/FormControls';
+import { maxLengthCreator, required } from '../../validators/validators';
 
 const Dialogs = (props) => {
    let dialogsElements = props.dialogs.map(d => <Dialog name={d.name} id={d.id} />);
@@ -28,13 +29,15 @@ const Dialogs = (props) => {
    )
 }
 
+const maxLength30 = maxLengthCreator(30);
 const DialogsForm = (props) => {
    return (
       // handleSubmit приходит из reduxForm после оборачивания ею DialogsForm
       <form onSubmit={props.handleSubmit}>
          <div>
             {/* все онченжи и онклики уже находятся в redux-form, по этому внутри формы они не указываются  */}
-            <Field component="textarea" name="newDialogBody" placeholder="New message" />
+            <Field component={Textarea} name="newDialogBody"
+               validate={[required, maxLength30]} placeholder="New message" />
          </div>
          <div>
             <button >Add message</button>
@@ -42,7 +45,6 @@ const DialogsForm = (props) => {
       </form>
    )
 }
-
 const afterSubmit = (result, dispatch) => dispatch(reset("newDialog"))
 const DialogsReduxForm = reduxForm({ form: "newDialog", onSubmitSuccess: afterSubmit })(DialogsForm)
 
