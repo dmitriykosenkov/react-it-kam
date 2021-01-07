@@ -10,8 +10,8 @@ import { clearPost } from '../../redux/redux-store';
 class ProfilePage extends React.Component {
    componentDidMount() {
       let userId = this.props.match.params.userId;
-      if(!userId) {
-          userId = 13029;
+      if(!userId || this.props.isAuth) {
+          userId = this.props.authorizedUserId;
       }
       this.props.getProfileThunkCreator(userId);
       this.props.getUserStatusThunkCreator(userId);
@@ -27,7 +27,9 @@ class ProfilePage extends React.Component {
 let mapStateToProps = (state) => {
    return {
       profile: state.profilePage.profile,
-      status: state.profilePage.status
+      status: state.profilePage.status,
+      isAuth: state.auth.isAuth,
+      authorizedUserId: state.auth.userId
    }
 }
 

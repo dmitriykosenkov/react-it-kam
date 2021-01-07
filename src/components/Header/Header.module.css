@@ -30,4 +30,5 @@
 .logout:hover,
 .logout:focus {
    background-color: tomato;
+   color:rgb(57, 79, 153);
 }
