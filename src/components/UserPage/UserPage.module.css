@@ -2,9 +2,7 @@
    width: 100px;
    text-align: center;
 }
-.selectedPage {
-   font-weight: bold;
-}
+
 .pageNumbers {
    display: flex;
    justify-content: space-between;
@@ -14,6 +12,10 @@
 }
 .pageNumbers span {
    cursor: pointer;
+   color: blanchedalmond;
+}
+.selectedPage {
+   font-weight: bold;
 }
 .users {
    padding: 20px 0 20px 0;

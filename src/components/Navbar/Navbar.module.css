@@ -1,16 +1,16 @@
 .nav {
    grid-area: n;
-   background-color: rgb(57, 79, 153);
+   background-color: rgb(21, 74, 78);
    padding: 20px;
    border-radius: 5px;
 }
 .item a{
-   color: #fff;
+   color: blanchedalmond;
    text-decoration: none;
 }
 
 .item .activeLink{
-   color: rgb(243, 169, 8);
+   color: darkorange;
 }
 .titleFriends {
    margin-top: 90px;
