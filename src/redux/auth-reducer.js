@@ -29,7 +29,7 @@ const authReducer = (state = defaultProfile, action) => {
 export const setAuthUserData = (userId, login, email, isAuth) => ({ type: SET_USER_DATA, payload: { userId, login, email, isAuth } });
 
 export const authMeThunkCreator = () => (dispatch) => {
-   authAPI.authMe()
+   return authAPI.authMe()
       .then(data => {
          if (data.resultCode === 0) {
             let { id, login, email } = data.data;
@@ -44,7 +44,7 @@ export const loginThunkCreator = (email, password, rememberMe) => (dispatch) => 
             dispatch(authMeThunkCreator());
          } else {
             let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some Error";
-            dispatch(stopSubmit("login", {_error: message}));
+            dispatch(stopSubmit("login", { _error: message }));
          }
       })
 }
