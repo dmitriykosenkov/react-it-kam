@@ -1,5 +1,11 @@
-.timer {
+.time{
+   text-align: center;
    color: blanchedalmond;
    font-family: 'Nunito Sans', sans-serif;
-   font-size: 19px;
+}
+.timer {
+   font-size: 20px;
+}
+.date{
+   font-size: 10px;
 }

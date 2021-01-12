@@ -1,29 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Clock.module.css";
-
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { date: new Date() };
-  }
-  componentDidMount() {
-    this.timerID = setInterval(() => {
-      this.tick();
+const Clock = (props) => {
+  let [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    let clockId = setInterval(() => {
+      setCurrentTime(new Date());
     }, 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-  tick() {
-    this.setState({
-      date: new Date(),
-    });
-  }
-  render() {
-    return (
-      <div className={styles.timer}>{this.state.date.toLocaleTimeString()}</div>
-    );
-  }
-}
-
+    return () => clearInterval(clockId);
+  });
+  return (
+    <div>
+      <div className={styles.time}>
+        <div className={styles.timer}>{currentTime.toLocaleTimeString()}</div>
+        <div className={styles.date}>{currentTime.toLocaleDateString()}</div>
+      </div>
+    </div>
+  );
+};
 export default Clock;
