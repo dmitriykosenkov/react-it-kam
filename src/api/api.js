@@ -48,6 +48,16 @@ export const profileAPI = {
       return instaceAxios.put(`profile/status/`, {
          status: status
       })
+   },
+   savePhoto(photoFile) {
+      const formData = new FormData();
+      formData.append("image", photoFile);
+      const config = {
+         headers: {
+            'content-type': 'multipart/form-data'
+        }
+      }
+      return instaceAxios.put(`profile/photo/`, formData, config)
    }
 }
 

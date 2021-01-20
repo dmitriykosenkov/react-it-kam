@@ -10,6 +10,7 @@
 }
 
 .item .activeLink{
+   cursor: pointer;
    color: darkorange;
 }
 .titleFriends {

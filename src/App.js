@@ -14,18 +14,18 @@ import Login from './components/login/Login';
 import { connect } from 'react-redux';
 import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/commons/preloader/preloader";
+import store from "./redux/redux-store";
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 class App extends React.Component {
    componentDidMount() {
       this.props.initializeApp()
    }
-
    render() {
-
-      if(!this.props.initialized){
+      if (!this.props.initialized) {
          return <Preloader />
-      }   
-
+      }
       return (
          <div className="app-wrapper">
             <HeaderContainer />
@@ -51,5 +51,18 @@ const mapStateToProps = (state) => {
       initialized: state.app.initialized
    }
 }
+let AppContainer = connect(mapStateToProps, { initializeApp })(App);
 
-export default connect(mapStateToProps, { initializeApp })(App);
+const MainApp = (props) => {
+   return (
+      <React.StrictMode>
+         <BrowserRouter>
+            <Provider store={store}>
+               <AppContainer />
+            </Provider>
+         </BrowserRouter>
+      </React.StrictMode>
+   )
+}
+export default MainApp;
+

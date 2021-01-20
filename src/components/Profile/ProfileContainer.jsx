@@ -7,11 +7,12 @@ import {
   getProfileThunkCreator,
   getUserStatusThunkCreator,
   updateUserStatusThunkCreator,
+  savePhoto
 } from "../../redux/profile-reducer";
 import withAuthRedirectComponent from "../../hoc/authRedirect";
 
 class ProfilePage extends React.Component {
-  componentDidMount() {
+  refreshProfile() {
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.authorizedUserId;
@@ -22,12 +23,22 @@ class ProfilePage extends React.Component {
     this.props.getProfileThunkCreator(userId);
     this.props.getUserStatusThunkCreator(userId);
   }
+  componentDidMount() {
+    this.refreshProfile();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params.userId != prevProps.match.params.userId) {
+      this.refreshProfile();
+    }
+  }
   render() {
     return (
       <Profile
         {...this.props}
+        isOwner={!this.props.match.params.userId}
         profile={this.props.profile}
         status={this.props.status}
+        savePhoto={this.props.savePhoto}
         updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator}
       />
     );
@@ -48,6 +59,7 @@ export default compose(
     getProfileThunkCreator,
     getUserStatusThunkCreator,
     updateUserStatusThunkCreator,
+    savePhoto
   }),
   withRouter
   // withAuthRedirectComponent
