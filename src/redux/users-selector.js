@@ -4,12 +4,8 @@ const getUserPage = state => {
    return state.userPage.users
 }
 export const getUserPageReselect = createSelector(getUserPage, (users) => {
-   // let followedUsers = users.filter(u =>u.followed === true)
-   // debugger
-   // return followedUsers
    return users.filter(u => true)
 })
-
 
 export const getPageSize = state => {
    return state.userPage.pageSize

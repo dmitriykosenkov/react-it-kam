@@ -49,6 +49,7 @@ export const profileAPI = {
          status: status
       })
    },
+   
    savePhoto(photoFile) {
       const formData = new FormData();
       formData.append("image", photoFile);

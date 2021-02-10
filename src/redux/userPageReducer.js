@@ -81,41 +81,35 @@ export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 
 export const getUsersThunkCreator = (getUserPage, pageSize) => {
-   return (dispatch) => {
+   return async (dispatch) => {
       dispatch(setCurrentPage(getUserPage));
       dispatch(toggleIsFetching(true));
-      usersAPI.getUsers(getUserPage, pageSize)
-         .then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(data.items));
-            dispatch(setTotalUsersCount(data.totalCount));
-         })
+      const data = await usersAPI.getUsers(getUserPage, pageSize);
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
    }
 }
 
 export const followThunkCreator = (userId) => {
-   return (dispatch) => {
+   return async (dispatch) => {
       dispatch(toggleFollowingProgress(true, userId));
-      usersAPI.follow(userId)
-         .then(data => {
-            if (data.resultCode === 0) {
-               dispatch(followSuccsess(userId));
-            }
-            dispatch(toggleFollowingProgress(false, userId));
-         })
+      const data = await usersAPI.follow(userId);
+      if (data.resultCode === 0) {
+         dispatch(followSuccsess(userId));
+      }
+      dispatch(toggleFollowingProgress(false, userId));
    }
 }
 
 export const unfollowThunkCreator = (userId) => {
-   return (dispatch) => {
+   return async (dispatch) => {
       dispatch(toggleFollowingProgress(true, userId));
-      usersAPI.unfollow(userId)
-         .then(data => {
-            if (data.resultCode === 0) {
-               dispatch(unfollowSuccsess(userId));
-            }
-            dispatch(toggleFollowingProgress(false, userId));
-         })
+      const data = await usersAPI.unfollow(userId)
+      if (data.resultCode === 0) {
+         dispatch(unfollowSuccsess(userId));
+      }
+      dispatch(toggleFollowingProgress(false, userId));
    }
 }
 

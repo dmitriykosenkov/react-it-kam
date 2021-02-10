@@ -31,13 +31,11 @@ const sidebarReducer = (state = defaultSidebar, action) => {
 export const setFriends = (friends) => ({ type: SET_FRIENDS, friends })
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 
-export const getFriendsThunkCreator = (pageSize) => (dispatch) => {
+export const getFriendsThunkCreator = (pageSize) => async (dispatch) => {
    dispatch(toggleIsFetching(true));
-   sidebarAPI.getFriends(pageSize)
-      .then(data => {
-         dispatch(toggleIsFetching(false));
-         dispatch(setFriends(data.items));
-      })
+   const data = await sidebarAPI.getFriends(pageSize);
+   dispatch(toggleIsFetching(false));
+   dispatch(setFriends(data.items));
 }
 
 export default sidebarReducer;

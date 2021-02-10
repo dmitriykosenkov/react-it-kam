@@ -29,17 +29,18 @@ const profilePageReducer = (state = defaultProfile, action) => {
             posts: [...state.posts, newPost],
             newPostText: ''
          };
-      }
-      case SET_USER_PROFILE:
-         return {
-            ...state,
-            profile: action.profile
-         };
+      };
       case DELETE_POST:
          return {
             ...state,
             posts: state.posts.filter(p => p.id !== action.id)
          };
+      case SET_USER_PROFILE:
+         return {
+            ...state,
+            profile: action.profile
+         };
+
       case SET_USER_STATUS:
          return {
             ...state,
@@ -48,7 +49,7 @@ const profilePageReducer = (state = defaultProfile, action) => {
       case SAVE_PHOTO_SUCCESS:
          return {
             ...state,
-            profile: {...state.profile, photos: action.photos}
+            profile: { ...state.profile, photos: action.photos }
          };
       default:
          return state;
@@ -62,37 +63,29 @@ export const setUserStatusAC = (status) => ({ type: SET_USER_STATUS, status });
 export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos });
 
 export const getProfileThunkCreator = (userId) => {
-   return (dispatch) => {
-      profileAPI.getUserProfile(userId)
-         .then(data => {
-            dispatch(setUserProfileAC(data));
-         })
+   return async (dispatch) => {
+      const data = await profileAPI.getUserProfile(userId);
+      dispatch(setUserProfileAC(data));
    }
 }
 
-export const getUserStatusThunkCreator = (userId) => (dispatch) => {
-   profileAPI.getUserStatus(userId)
-      .then(response => {
-         dispatch(setUserStatusAC(response.data));
-      })
+export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
+   let response = await profileAPI.getUserStatus(userId)
+   dispatch(setUserStatusAC(response.data));
 }
 
-export const updateUserStatusThunkCreator = (status) => (dispatch) => {
-   profileAPI.updateUserStatus(status)
-      .then(response => {
-         if (response.data.resultCode === 0) {
-            dispatch(setUserStatusAC(status));
-         }
-      })
+export const updateUserStatusThunkCreator = (status) => async (dispatch) => {
+   let response = await profileAPI.updateUserStatus(status);
+   if (response.data.resultCode === 0) {
+      dispatch(setUserStatusAC(status));
+   }
 }
-export const savePhoto = (file) => (dispatch) => {
-   profileAPI.savePhoto(file)
-      .then(response => {
-         debugger
-         if (response.data.resultCode === 0) {
-            dispatch(savePhotoSuccess(response.data.data.photos));
-         }
-      })
+
+export const savePhoto = (file) => async dispatch => {
+   let response = await profileAPI.savePhoto(file);
+   if (response.data.resultCode === 0) {
+      dispatch(savePhotoSuccess(response.data.data.photos));
+   }
 }
 
 export default profilePageReducer;
