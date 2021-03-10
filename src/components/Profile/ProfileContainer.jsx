@@ -7,7 +7,7 @@ import {
   getProfileThunkCreator,
   getUserStatusThunkCreator,
   updateUserStatusThunkCreator,
-  updateFullNameThunkCreator,
+  saveProfile,
   savePhoto
 } from "../../redux/profile-reducer";
 import withAuthRedirectComponent from "../../hoc/authRedirect";
@@ -40,6 +40,7 @@ class ProfilePage extends React.Component {
         profile={this.props.profile}
         status={this.props.status}
         savePhoto={this.props.savePhoto}
+        saveProfile={this.props.saveProfile}
         updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator}
       />
     );
@@ -60,7 +61,8 @@ export default compose(
     getProfileThunkCreator,
     getUserStatusThunkCreator,
     updateUserStatusThunkCreator,
-    savePhoto
+    savePhoto,
+    saveProfile
   }),
   withRouter
   // withAuthRedirectComponent
