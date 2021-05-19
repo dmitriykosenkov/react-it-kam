@@ -4,28 +4,26 @@ import './App.css';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
-import { Route } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import UserPageContainer from './components/UserPage/UserPageContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/login/Login';
-import { connect } from 'react-redux';
-import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/commons/preloader/preloader";
+import { HashRouter, Route, BrowserRouter } from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
+import { initializeApp } from "./redux/app-reducer";
 import store from "./redux/redux-store";
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 
 class App extends React.Component {
    componentDidMount() {
       this.props.initializeApp()
    }
    render() {
-      if (!this.props.initialized) {
-         return <Preloader />
-      }
+      // if (!this.props.initialized) {
+      //    return <Preloader />
+      // }
       return (
          <div className="app-wrapper">
             <HeaderContainer />
@@ -56,7 +54,13 @@ let AppContainer = connect(mapStateToProps, { initializeApp })(App);
 const MainApp = (props) => {
    return (
       <React.StrictMode>
-         <BrowserRouter>
+         {/* HashRouter для адекватной работы с gh-pages, в реальной жизни HashRouter неиспользут */}
+         {/* <HashRouter >
+            <Provider store={store}>
+               <AppContainer />
+            </Provider>
+         </HashRouter> */}
+         <BrowserRouter basename={process.env.PUBLIC_URL} >
             <Provider store={store}>
                <AppContainer />
             </Provider>

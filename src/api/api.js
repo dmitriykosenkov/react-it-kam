@@ -45,11 +45,11 @@ export const profileAPI = {
       return instaceAxios.get(`profile/status/${id}`)
    },
    updateUserStatus(status) {
-      return instaceAxios.put(`profile/status/`, {
-         status: status
-      })
+      return instaceAxios.put(`profile/status/`, { status: status })
    },
-   
+   saveProfile(profile) {
+      return instaceAxios.put(`profile`, profile)
+   },
    savePhoto(photoFile) {
       const formData = new FormData();
       formData.append("image", photoFile);
@@ -59,6 +59,10 @@ export const profileAPI = {
         }
       }
       return instaceAxios.put(`profile/photo/`, formData, config)
+   },
+
+   saveProfile(profile) {
+      return instaceAxios.put(`profile`, profile)
    }
 }
 
