@@ -7,14 +7,8 @@ import {
   getProfileThunkCreator,
   getUserStatusThunkCreator,
   updateUserStatusThunkCreator,
-<<<<<<< HEAD
-  saveProfile,
-  savePhoto
-=======
-  updateFullNameThunkCreator,
   savePhoto,
   saveProfile
->>>>>>> lesson
 } from "../../redux/profile-reducer";
 import withAuthRedirectComponent from "../../hoc/authRedirect";
 

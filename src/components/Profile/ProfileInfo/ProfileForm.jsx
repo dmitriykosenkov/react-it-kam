@@ -6,7 +6,6 @@ import ProfileName from "./ProfileName";
 import { Field, reduxForm } from "redux-form";
 
 const ProfileDataForm = (props) => {
-   console.log(props.error);
   return (
     <form onSubmit={props.handleSubmit}>
       <button>Save</button>

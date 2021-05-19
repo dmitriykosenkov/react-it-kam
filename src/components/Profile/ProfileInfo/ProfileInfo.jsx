@@ -3,14 +3,10 @@ import Preloader from "../../commons/preloader/preloader";
 import s from "./ProfileInfo.module.css";
 import ProfileStatusWithHook from "./ProfileStatusWithHook";
 import userPhoto from "../../../assets/images/user-photo.webp";
-<<<<<<< HEAD
 import { Input } from "../../commons/FormControls/FormControls";
-import { useState } from "react";
 import { Field, reduxForm } from "redux-form";
-=======
 import ProfileName from "./ProfileName";
 import ReduxProfileDataForm from "./ProfileForm";
->>>>>>> lesson
 
 const ProfileInfo = (props) => {
   const onPhotoChange = (e) => {
@@ -18,28 +14,17 @@ const ProfileInfo = (props) => {
       props.savePhoto(e.target.files[0]);
     }
   };
-<<<<<<< HEAD
-  let [editMode, setEditMode] = useState(false);
-=======
-
   let [editMode, setEditMode] = React.useState(false);
->>>>>>> lesson
   const activateEditMode = () => {
     setEditMode(true);
   };
 
   const onSubmit = (values) => {
-<<<<<<< HEAD
-    props.saveProfile(values);
-    setEditMode(false);
-  };
-=======
     props.saveProfile(values).then(() => {
-       setEditMode(false);
-    })
+      setEditMode(false);
+    });
   };
 
->>>>>>> lesson
   if (!props.profile) {
     return <Preloader />;
   }
@@ -52,26 +37,6 @@ const ProfileInfo = (props) => {
         <div>
           {props.isOwner && <input type="file" onChange={onPhotoChange} />}
         </div>
-<<<<<<< HEAD
-        {!editMode ? (
-          <ProfileData
-            isOwner={props.isOwner}
-            profile={props.profile}
-            activateEditMode={activateEditMode}
-          />
-        ) : (
-          <ReduxProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
-        )}
-
-=======
->>>>>>> lesson
-        <ProfileStatusWithHook
-          isOwner={props.isOwner}
-          status={props.status}
-          updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
-        />
-<<<<<<< HEAD
-=======
         {!editMode ? (
           <ProfileData
             isOwner={props.isOwner}
@@ -80,20 +45,22 @@ const ProfileInfo = (props) => {
           />
         ) : (
           <ReduxProfileDataForm
-            onSubmit={onSubmit}
             initialValues={props.profile}
             profile={props.profile}
+            onSubmit={onSubmit}
           />
         )}
->>>>>>> lesson
+
+        <ProfileStatusWithHook
+          isOwner={props.isOwner}
+          status={props.status}
+          updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
+        />
       </div>
     </div>
   );
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> lesson
 const ProfileData = (props) => {
   return (
     <div>
@@ -126,50 +93,5 @@ const ProfileData = (props) => {
   );
 };
 
-const ProfileDataForm = (props) => {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <button>Save</button>
-      <div>
-        <div>
-          <b>Full name:</b>
-        </div>
-        <div>
-          <Field name={"fullName"} component={Input} />
-        </div>
-      </div>
-      <div>
-        <div>
-          <b>Looking for a job: </b>
-        </div>
-        <div>
-          <Field name={"lookingForAJob"} component={Input} type="checkbox" />
-        </div>
-      </div>
-      <div>
-        <div>
-          <b>Skills: </b>
-        </div>
-        <div>
-          <Field name={"lookingForAJobDescription"} component={Input} />
-        </div>
-      </div>
-      <div>
-        <b>Contacts:</b>
-        {Object.keys(props.profile.contacts).map((key) => {
-          return (
-            <div className={s.contact}>
-              {key}: <Field name={`contacts.${key}`} component={Input} type="text" placeholder={key}/>
-            </div>
-          );
-        })}
-      </div>
-      
-    </form>
-  );
-};
-const ReduxProfileDataForm = reduxForm({ form: "ProfileForm" })(
-  ProfileDataForm
-);
 
 export default ProfileInfo;
