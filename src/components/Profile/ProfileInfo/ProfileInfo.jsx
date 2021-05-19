@@ -1,11 +1,16 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
 import Preloader from "../../commons/preloader/preloader";
 import s from "./ProfileInfo.module.css";
 import ProfileStatusWithHook from "./ProfileStatusWithHook";
 import userPhoto from "../../../assets/images/user-photo.webp";
+<<<<<<< HEAD
 import { Input } from "../../commons/FormControls/FormControls";
 import { useState } from "react";
 import { Field, reduxForm } from "redux-form";
+=======
+import ProfileName from "./ProfileName";
+import ReduxProfileDataForm from "./ProfileForm";
+>>>>>>> lesson
 
 const ProfileInfo = (props) => {
   const onPhotoChange = (e) => {
@@ -13,15 +18,28 @@ const ProfileInfo = (props) => {
       props.savePhoto(e.target.files[0]);
     }
   };
+<<<<<<< HEAD
   let [editMode, setEditMode] = useState(false);
+=======
+
+  let [editMode, setEditMode] = React.useState(false);
+>>>>>>> lesson
   const activateEditMode = () => {
     setEditMode(true);
   };
 
   const onSubmit = (values) => {
+<<<<<<< HEAD
     props.saveProfile(values);
     setEditMode(false);
   };
+=======
+    props.saveProfile(values).then(() => {
+       setEditMode(false);
+    })
+  };
+
+>>>>>>> lesson
   if (!props.profile) {
     return <Preloader />;
   }
@@ -34,6 +52,7 @@ const ProfileInfo = (props) => {
         <div>
           {props.isOwner && <input type="file" onChange={onPhotoChange} />}
         </div>
+<<<<<<< HEAD
         {!editMode ? (
           <ProfileData
             isOwner={props.isOwner}
@@ -44,16 +63,37 @@ const ProfileInfo = (props) => {
           <ReduxProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
         )}
 
+=======
+>>>>>>> lesson
         <ProfileStatusWithHook
           isOwner={props.isOwner}
           status={props.status}
           updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
         />
+<<<<<<< HEAD
+=======
+        {!editMode ? (
+          <ProfileData
+            isOwner={props.isOwner}
+            profile={props.profile}
+            activateEditMode={activateEditMode}
+          />
+        ) : (
+          <ReduxProfileDataForm
+            onSubmit={onSubmit}
+            initialValues={props.profile}
+            profile={props.profile}
+          />
+        )}
+>>>>>>> lesson
       </div>
     </div>
   );
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> lesson
 const ProfileData = (props) => {
   return (
     <div>

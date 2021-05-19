@@ -59,6 +59,10 @@ export const profileAPI = {
         }
       }
       return instaceAxios.put(`profile/photo/`, formData, config)
+   },
+
+   saveProfile(profile) {
+      return instaceAxios.put(`profile`, profile)
    }
 }
 

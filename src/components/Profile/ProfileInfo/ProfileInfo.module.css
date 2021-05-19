@@ -13,4 +13,13 @@
 }
 .contact {
    padding-left: 10px;
+<<<<<<< HEAD
+=======
+}
+.status {
+   cursor: pointer;
+}
+.input {
+   width: 300px;
+>>>>>>> lesson
 }
